@@ -32,7 +32,7 @@
             margin-bottom: 5px; /* 设置标签底部边距 */
         }
 
-        input[type="date"], input[type="button"] {
+        input[type="date"], input[type="submit"] {
             padding: 10px;
             margin: 10px 0;
             width: calc(100% - 20px);
@@ -41,7 +41,7 @@
             box-sizing: border-box; /* 设置输入框宽度包括边框和填充 */
         }
 
-        input[type="button"] {
+        input[type="submit"] {
             background-color: #007bff;
             color: #fff;
             border: none;
@@ -49,7 +49,7 @@
             cursor: pointer;
         }
 
-        input[type="button"]:hover {
+        input[type="submit"]:hover {
             background-color: #0056b3;
         }
 
@@ -66,28 +66,49 @@
 <body>
     <div class="container">
         <h1>医宁心智能开方系统</h1>
-        <form method="post">
+        <form id="timeForm">
             <label for="date">选择时间：</label>
             <input type="date" id="date" name="date">
             <br>
-            <input type="button" value="计算!">
+            <input type="submit" value="计算!">
             <br>
         </form>
         <div class="result">
-            结果是：
+            结果是： <span id="result"></span>
         </div>
         <div class="monthexp">
-            月份解释：
+            月份解释：<span id="monthexp"></span>
         </div>
         <div class="yearexp">
-            年份解释：
+            年份解释：<span id="yearexp"></span>
         </div>
     </div>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
         // 获取当前日期并设置为时间选择器的默认值
+        
         let currentDate = new Date();
         let formattedDate = currentDate.toISOString().slice(0, 10);
         document.getElementById("date").value = formattedDate;
+        
+        //ajax请求数据
+        $(document).ready(function(){
+            $("#timeForm").submit(function(event) {
+                event.preventDefault();
+                var formData = $(this).serialize();
+                $.ajax({
+                    type: 'POST',
+                    url: '/calculate',
+                    data: formData,
+                    success: function(response){
+                        $('#result').text(response.data);
+                    },
+                    error: function() {
+                        alert('服务器错误,请重试')
+                    }
+                });
+            });
+        });
     </script>
 </body>
 </html>
