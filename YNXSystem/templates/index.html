@@ -101,7 +101,9 @@
                     url: '/calculate',
                     data: formData,
                     success: function(response){
-                        $('#result').text(response.data);
+                        $('#result').text(response.result);
+                        $('#monthexp').text(response.month);
+                        $('#yearexp').text(response.year);
                     },
                     error: function() {
                         alert('服务器错误,请重试')
