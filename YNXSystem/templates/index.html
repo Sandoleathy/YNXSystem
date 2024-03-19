@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>医宁心智能开方系统</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+            text-align: center;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            margin-top: 0;
+            color: #007bff; /* 设置标题颜色为蓝色 */
+        }
+
+        label {
+            display: block; /* 将 label 元素显示为块级元素 */
+            margin-bottom: 5px; /* 设置标签底部边距 */
+        }
+
+        input[type="date"], input[type="button"] {
+            padding: 10px;
+            margin: 10px 0;
+            width: calc(100% - 20px);
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box; /* 设置输入框宽度包括边框和填充 */
+        }
+
+        input[type="button"] {
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        input[type="button"]:hover {
+            background-color: #0056b3;
+        }
+
+        .result, .monthexp, .yearexp {
+            margin-top: 20px; /* 设置各结果块的顶部边距 */
+            padding: 10px;
+            background-color: #f9f9f9;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            text-align: left; /* 设置文本左对齐 */
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>医宁心智能开方系统</h1>
+        <form method="post">
+            <label for="date">选择时间：</label>
+            <input type="date" id="date" name="date">
+            <br>
+            <input type="button" value="计算!">
+            <br>
+        </form>
+        <div class="result">
+            结果是：
+        </div>
+        <div class="monthexp">
+            月份解释：
+        </div>
+        <div class="yearexp">
+            年份解释：
+        </div>
+    </div>
+    <script>
+        // 获取当前日期并设置为时间选择器的默认值
+        let currentDate = new Date();
+        let formattedDate = currentDate.toISOString().slice(0, 10);
+        document.getElementById("date").value = formattedDate;
+    </script>
+</body>
+</html>
